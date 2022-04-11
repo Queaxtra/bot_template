@@ -2,17 +2,13 @@ const Discord = require('discord.js');
 const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILD_MESSAGES, Discord.Intents.FLAGS.GUILDS] });
 const fs = require('fs');
 const config = require('./config');
-const tarih = new Date();
-const saat = tarih.getHours();
-const dakika = tarih.getMinutes();
-const saniye = tarih.getSeconds();
-const toplamtarih = saat + ':' + dakika + ':' + saniye;
-const colors = require('colors');
 const { JsonDatabase } = require("wio.db");
-const db = new JsonDatabase({ databasePath: "./veritabanı/data.json" });
+const db = new JsonDatabase({ databasePath: "./database/data.json" });
+const moment = require('moment');
+moment.locale('tr');
 
 client.on('ready', () => {
-    console.log(`[LOG] Bot ${toplamtarih} saatinde başlatıldı.`.cyan);
+    console.log(`[LOG] Bot ${moment().format('LTS')} saatinde başlatıldı.`.cyan);
 });
 
 client.commands = new Discord.Collection();
